@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node 
+{ 
+  int data;
+  struct node *next ;
+  
+}*head,*tail;
+/* Code for insertion at the beginning*/
+void insert_at_beg ()
+{
+  struct node *newnode ;
+  newnode= (struct node*)malloc(sizeof(struct node));
+  printf("Enter Data ");
+  scanf("%d",&(*newnode).data);
+  newnode->next=0;
+  if(tail ==0)
+  {
+    tail=newnode;
+    tail->next=newnode;
+  }
+  else
+  {
+    newnode->next= tail->next;
+    tail->next=newnode;
+  }
+  
+  
+}
+/* Code for insertion at end*/
+void insert_at_end()
+{
+  struct node *newnode ;
+  newnode= (struct node*)malloc(sizeof(struct node));
+  printf("Enter Data ");
+  scanf("%d",&(*newnode).data);
+  newnode->next=tail->next; 
+  tail->next=newnode;
+  tail=newnode;
+  
+}
+
+
+/* Code for delete the node from beg*/
+void delete_from_beg()
+{
+  struct node *del;
+  del = tail->next;
+  tail->next = del->next;
+  free(del);
+  
+}
+
+ /* Code for Displaying Elements*/
+void display()
+{
+ struct node *temp;
+   temp=tail->next;
+ while(temp->next != tail->next)
+   {
+    printf("%d \n",(*temp).data);
+    temp=temp->next;
+   }
+  printf("%d \n",(*temp).data);
+  
+}
+
+/* Code for deleting from end */
+  void delete_from_end()
+{
+  
+  struct node *del_end;
+  del_end = head;
+  int i =1;
+  while(del_end->next != tail)
+  {
+    del_end=del_end->next;
+    printf("Loop");
+    printf("%d \n",i);
+    i++;
+  }
+  del_end->next= tail->next;
+  tail=del_end;
+  free(del_end);
+  printf("Done");
+  
+}
+ 
+int main ()
+{
+  
+ head=0;
+ int dec =1;
+ int count =0;
+ while(dec)
+ {
+   /* Creating node*/
+  struct node *newnode ;
+  newnode= (struct node*)malloc(sizeof(struct node));
+  printf("Enter Data ");
+  scanf("%d",&(*newnode).data);
+  newnode->next=0;
+  count++;
+  if(head==0)
+   {
+     head=newnode;
+     tail=newnode;
+   }
+  else
+   {
+     tail->next=newnode;
+     tail=newnode;
+     
+   } 
+   printf("Do you want to continue(0,1)?");
+   scanf("%d",&dec);
+   tail->next=head;
+   
+  }
+  do
+  {
+   int choice;
+   int flag =0;
+  printf("Enter the Choice \n");
+  printf("Enter 1 to insert at beginning \n");
+  printf("Enter 2 to insert at end\n");
+  printf("Enter 3 to delete node from beginning\n");
+  printf("Enter 4 to display element\n");
+  printf("Enter 5 to delete from end \n");
+  scanf("%d",&choice);
+  switch(choice)
+  {
+  case 1:insert_at_beg();
+  break;
+  case 2:insert_at_end();
+  break;
+  case 3: delete_from_beg();
+  break;
+  case 4:display();
+  break;
+  case 5:delete_from_end();
+  break;
+  default:
+  flag=1;
+  break;
+  if (flag ==0)
+  continue;
+  if(flag==1)
+  break;
+  }
+  }while(1);
+ }
